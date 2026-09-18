@@ -326,7 +326,8 @@ header.scrolled nav {
         1px solid
         rgba(255,255,255,.15);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     font-size: 13px;
 
@@ -499,7 +500,7 @@ header.scrolled nav {
         950;
 
     overflow:
-        visible;
+        hidden;
 }
 
 .hero-line {
@@ -563,9 +564,10 @@ header.scrolled nav {
     background-size:
         200% auto;
 
+    /* FIX: keep BOTH the gradient animation and hero reveal */
     animation:
-        gradientMove 5s
-        ease infinite;
+        gradientMove 5s ease infinite,
+        heroLine 1s .38s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 @keyframes gradientMove {
@@ -1392,6 +1394,106 @@ section {
         35px;
 }
 
+
+/* =========================================================
+   SERVICE STOCK IMAGES
+========================================================= */
+
+.service-image {
+    width:
+        100%;
+
+    height:
+        125px;
+
+    margin-bottom:
+        22px;
+
+    border-radius:
+        14px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    background-position:
+        center;
+
+    background-size:
+        cover;
+
+    position:
+        relative;
+
+    box-shadow:
+        inset 0 0 40px
+        rgba(0,0,0,.25);
+
+    transition:
+        transform .45s
+            cubic-bezier(.16,1,.3,1),
+        filter .45s ease;
+}
+
+.service-image::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(4,9,6,.05),
+            rgba(4,9,6,.48)
+        );
+}
+
+.service:hover .service-image {
+    transform:
+        scale(1.025);
+
+    filter:
+        saturate(1.12);
+}
+
+.service:nth-child(1) .service-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80");
+}
+
+.service:nth-child(2) .service-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80");
+}
+
+.service:nth-child(3) .service-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=80");
+}
+
+.service:nth-child(4) .service-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80");
+}
+
+.service:nth-child(5) .service-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80");
+}
+
+.service:nth-child(6) .service-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80");
+}
+
 .service-number {
     color:
         var(--violet);
@@ -1403,7 +1505,7 @@ section {
         900;
 
     margin-bottom:
-        60px;
+        18px;
 }
 
 .service h3 {
@@ -1636,6 +1738,91 @@ section {
         rgba(87,148,255,.28);
 }
 
+
+/* =========================================================
+   PROCESS STOCK IMAGES
+========================================================= */
+
+.step-image {
+    width:
+        100%;
+
+    height:
+        125px;
+
+    margin-bottom:
+        22px;
+
+    border-radius:
+        14px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    background-position:
+        center;
+
+    background-size:
+        cover;
+
+    position:
+        relative;
+
+    box-shadow:
+        inset 0 0 40px
+        rgba(0,0,0,.25);
+
+    transition:
+        transform .45s
+            cubic-bezier(.16,1,.3,1),
+        filter .45s ease;
+}
+
+.step-image::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(4,9,6,.05),
+            rgba(4,9,6,.48)
+        );
+}
+
+.step:hover .step-image {
+    transform:
+        scale(1.025);
+
+    filter:
+        saturate(1.12);
+}
+
+.step:nth-child(1) .step-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80");
+}
+
+.step:nth-child(2) .step-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=900&q=80");
+}
+
+.step:nth-child(3) .step-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=900&q=80");
+}
+
 .step-number {
     color:
         var(--blue);
@@ -1652,7 +1839,7 @@ section {
 
 .step h3 {
     margin-top:
-        75px;
+        18px;
 
     font-size:
         27px;
@@ -2195,6 +2382,11 @@ body:hover .cursor-glow {
             none;
     }
 
+    .service-image {
+        height:
+            180px;
+    }
+
     .feature {
         grid-template-columns:
             1fr;
@@ -2213,6 +2405,11 @@ body:hover .cursor-glow {
     .process {
         grid-template-columns:
             1fr;
+    }
+
+    .step-image {
+        height:
+            180px;
     }
 
     .testimonials {
@@ -2253,7 +2450,7 @@ body:hover .cursor-glow {
 
 @media (prefers-reduced-motion: reduce) {
 
-    * ,
+    *,
     *::before,
     *::after {
         animation-duration:
@@ -2784,6 +2981,11 @@ body:hover .cursor-glow {
 
         <div class="service">
 
+            <div
+                class="service-image"
+                aria-label="Short-form video creation"
+            ></div>
+
             <div class="service-number">
                 01
             </div>
@@ -2801,6 +3003,11 @@ body:hover .cursor-glow {
 
 
         <div class="service">
+
+            <div
+                class="service-image"
+                aria-label="Creative content planning"
+            ></div>
 
             <div class="service-number">
                 02
@@ -2820,6 +3027,11 @@ body:hover .cursor-glow {
 
         <div class="service">
 
+            <div
+                class="service-image"
+                aria-label="Social media captions"
+            ></div>
+
             <div class="service-number">
                 03
             </div>
@@ -2837,6 +3049,11 @@ body:hover .cursor-glow {
 
 
         <div class="service">
+
+            <div
+                class="service-image"
+                aria-label="Motion graphics and digital editing"
+            ></div>
 
             <div class="service-number">
                 04
@@ -2856,6 +3073,11 @@ body:hover .cursor-glow {
 
         <div class="service">
 
+            <div
+                class="service-image"
+                aria-label="Music and sound production"
+            ></div>
+
             <div class="service-number">
                 05
             </div>
@@ -2873,6 +3095,11 @@ body:hover .cursor-glow {
 
 
         <div class="service">
+
+            <div
+                class="service-image"
+                aria-label="Digital content delivery"
+            ></div>
 
             <div class="service-number">
                 06
@@ -2995,6 +3222,11 @@ body:hover .cursor-glow {
 
         <div class="step">
 
+            <div
+                class="step-image"
+                aria-label="Uploading video footage"
+            ></div>
+
             <div class="step-number">
                 01 / SEND
             </div>
@@ -3013,6 +3245,11 @@ body:hover .cursor-glow {
 
         <div class="step">
 
+            <div
+                class="step-image"
+                aria-label="Video editing workflow"
+            ></div>
+
             <div class="step-number">
                 02 / EDIT
             </div>
@@ -3030,6 +3267,11 @@ body:hover .cursor-glow {
 
 
         <div class="step">
+
+            <div
+                class="step-image"
+                aria-label="Publishing social media content"
+            ></div>
 
             <div class="step-number">
                 03 / POST
@@ -3318,7 +3560,7 @@ body:hover .cursor-glow {
             <!-- CHANGE INSTAGRAM -->
 
             <a
-                href="https://www.instagram.com/trtlat3am/"
+                href="https://instagram.com/"
                 target="_blank"
                 class="btn btn-primary"
             >
@@ -3329,7 +3571,7 @@ body:hover .cursor-glow {
             <!-- CHANGE EMAIL -->
 
             <a
-                href="mailto:mcleaksaltacc2@gmail.com"
+                href="mailto:hello@example.com"
                 class="btn btn-secondary"
             >
                 Send an email ↗
