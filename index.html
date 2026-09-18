@@ -11,10 +11,6 @@ content="Short-form video editing for restaurants, shops and growing businesses.
 
 <style>
 
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 :root {
     --bg: #040906;
     --bg-soft: #07100b;
@@ -37,11 +33,6 @@ content="Short-form video editing for restaurants, shops and growing businesses.
 
     --max: 1180px;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
     margin: 0;
@@ -97,11 +88,6 @@ section[id] {
     scroll-margin-top: 90px;
 }
 
-
-/* =========================================================
-   BACKGROUND GRID
-========================================================= */
-
 body::before {
     content: "";
 
@@ -138,11 +124,6 @@ body::before {
         transform: translateY(70px);
     }
 }
-
-
-/* =========================================================
-   AMBIENT LIGHTS
-========================================================= */
 
 .ambient {
     position: fixed;
@@ -200,11 +181,6 @@ body::before {
     }
 }
 
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
 .container {
     width:
         min(
@@ -214,11 +190,6 @@ body::before {
 
     margin: auto;
 }
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 header {
     position: sticky;
@@ -287,6 +258,9 @@ header.scrolled nav {
     color: var(--muted);
 
     font-size: 14px;
+
+    position: relative;
+    z-index: 1001;
 }
 
 .nav-links a {
@@ -294,6 +268,10 @@ header.scrolled nav {
 
     transition:
         color .25s ease;
+
+    display: inline-block;
+
+    visibility: visible;
 }
 
 .nav-links a::after {
@@ -340,6 +318,13 @@ header.scrolled nav {
         transform .25s ease,
         background .25s ease,
         color .25s ease;
+
+    position: relative;
+    z-index: 1001;
+
+    display: inline-flex;
+
+    visibility: visible;
 }
 
 .nav-contact:hover {
@@ -355,11 +340,6 @@ header.scrolled nav {
     border-color:
         white;
 }
-
-
-/* =========================================================
-   HERO
-========================================================= */
 
 .hero {
     position: relative;
@@ -536,11 +516,6 @@ header.scrolled nav {
     }
 }
 
-
-/* =========================================================
-   MAIN HERO TEXT ANIMATION
-========================================================= */
-
 .hero h1 {
     max-width:
         1050px;
@@ -703,11 +678,6 @@ header.scrolled nav {
         var(--text);
 }
 
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
 .buttons {
     display: flex;
 
@@ -811,11 +781,6 @@ header.scrolled nav {
         black;
 }
 
-
-/* =========================================================
-   TEXT REVEAL SYSTEM
-========================================================= */
-
 .reveal {
     opacity: 0;
 
@@ -853,11 +818,6 @@ header.scrolled nav {
         blur(6px);
 }
 
-
-/* =========================================================
-   CHAPTER TEXT ANIMATION
-========================================================= */
-
 .reveal.visible .section-label {
     animation:
         chapterLabel .7s
@@ -885,66 +845,42 @@ header.scrolled nav {
 @keyframes chapterLabel {
     from {
         opacity: 0;
-
-        transform:
-            translateY(14px);
-
-        filter:
-            blur(4px);
+        transform: translateY(14px);
+        filter: blur(4px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
-
-        filter:
-            blur(0);
+        transform: translateY(0);
+        filter: blur(0);
     }
 }
 
 @keyframes chapterTitle {
     from {
         opacity: 0;
-
-        transform:
-            translateY(30px);
-
-        filter:
-            blur(7px);
+        transform: translateY(30px);
+        filter: blur(7px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
-
-        filter:
-            blur(0);
+        transform: translateY(0);
+        filter: blur(0);
     }
 }
 
 @keyframes chapterDescription {
     from {
         opacity: 0;
-
-        transform:
-            translateY(18px);
-
-        filter:
-            blur(5px);
+        transform: translateY(18px);
+        filter: blur(5px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
-
-        filter:
-            blur(0);
+        transform: translateY(0);
+        filter: blur(0);
     }
 }
 
@@ -1014,11 +950,6 @@ header.scrolled nav {
     }
 }
 
-
-/* =========================================================
-   SUBTLE CONTENT ARRIVAL
-========================================================= */
-
 .reveal.visible .portfolio,
 .reveal.visible .stats,
 .reveal.visible .services,
@@ -1051,11 +982,6 @@ header.scrolled nav {
             translateY(0);
     }
 }
-
-
-/* =========================================================
-   TRUST BAR
-========================================================= */
 
 .trust-bar {
     border-top:
@@ -1121,11 +1047,6 @@ header.scrolled nav {
     margin-right:
         12px;
 }
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
 
 section {
     padding:
@@ -1198,11 +1119,6 @@ section {
         15px;
 }
 
-
-/* =========================================================
-   PORTFOLIO
-========================================================= */
-
 .portfolio {
     display:
         grid;
@@ -1265,11 +1181,6 @@ section {
         0 30px 80px
         rgba(0,0,0,.40);
 }
-
-
-/* =========================================================
-   VIDEO CONTAINER
-========================================================= */
 
 .project-media {
     position:
@@ -1512,11 +1423,6 @@ section {
         13px;
 }
 
-
-/* =========================================================
-   STATS
-========================================================= */
-
 .stats {
     display:
         grid;
@@ -1583,11 +1489,6 @@ section {
         12px;
 }
 
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
 .services {
     display:
         grid;
@@ -1633,11 +1534,6 @@ section {
     padding-top:
         35px;
 }
-
-
-/* =========================================================
-   SERVICE IMAGES
-========================================================= */
 
 .service-image {
     width:
@@ -1705,9 +1601,6 @@ section {
         );
 }
 
-
-/* Actual stock photos */
-
 .service-image.reels {
     background-image:
         url("https://images.pexels.com/photos/8359955/pexels-photo-8359955.jpeg?auto=compress&cs=tinysrgb&w=1200");
@@ -1773,11 +1666,6 @@ section {
     max-width:
         310px;
 }
-
-
-/* =========================================================
-   FEATURE
-========================================================= */
 
 .feature {
     display:
@@ -1932,11 +1820,6 @@ section {
         12px;
 }
 
-
-/* =========================================================
-   PROCESS
-========================================================= */
-
 .process {
     display:
         grid;
@@ -1998,9 +1881,6 @@ section {
     letter-spacing:
         1px;
 }
-
-
-/* PROCESS IMAGES */
 
 .step-image {
     width:
@@ -2099,11 +1979,6 @@ section {
     font-size:
         14px;
 }
-
-
-/* =========================================================
-   TESTIMONIALS
-========================================================= */
 
 .testimonials {
     display:
@@ -2239,11 +2114,6 @@ section {
         2px;
 }
 
-
-/* =========================================================
-   FAQ
-========================================================= */
-
 .faq {
     max-width:
         850px;
@@ -2309,11 +2179,6 @@ section {
     margin-top:
         10px;
 }
-
-
-/* =========================================================
-   CTA
-========================================================= */
 
 .cta {
     position:
@@ -2459,11 +2324,6 @@ section {
         30px;
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
 footer {
     margin-top:
         100px;
@@ -2486,11 +2346,6 @@ footer {
     font-size:
         12px;
 }
-
-
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
 
 .cursor-glow {
     position:
@@ -2529,11 +2384,6 @@ body:hover .cursor-glow {
     opacity:
         1;
 }
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
 
 @media (max-width: 850px) {
 
@@ -2686,11 +2536,6 @@ body:hover .cursor-glow {
 
 }
 
-
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -2750,20 +2595,12 @@ body:hover .cursor-glow {
 </style>
 </head>
 
-
 <body id="top">
-
-<!-- AMBIENT BACKGROUND -->
 
 <div class="ambient one"></div>
 <div class="ambient two"></div>
 
 <div class="cursor-glow"></div>
-
-
-<!-- =====================================================
-     NAV
-===================================================== -->
 
 <header>
 
@@ -2804,13 +2641,7 @@ body:hover .cursor-glow {
 
 </header>
 
-
 <main>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
 
 <section class="container hero">
 
@@ -2824,7 +2655,6 @@ body:hover .cursor-glow {
 
     </div>
 
-
     <h1>
 
         <span class="hero-line">
@@ -2836,7 +2666,6 @@ body:hover .cursor-glow {
         </span>
 
     </h1>
-
 
     <div class="hero-bottom">
 
@@ -2851,7 +2680,6 @@ body:hover .cursor-glow {
             for restaurants, shops and local businesses.
 
         </p>
-
 
         <div class="buttons">
 
@@ -2875,33 +2703,19 @@ body:hover .cursor-glow {
 
 </section>
 
-
-<!-- =====================================================
-     TRUST BAR
-===================================================== -->
-
 <div class="trust-bar">
 
     <div class="container trust-inner">
 
         <span>Instagram Reels</span>
-
         <span>TikTok</span>
-
         <span>YouTube Shorts</span>
-
         <span>Vertical Ads</span>
-
         <span>Social Content</span>
 
     </div>
 
 </div>
-
-
-<!-- =====================================================
-     PORTFOLIO
-===================================================== -->
 
 <section
     class="container reveal"
@@ -2932,38 +2746,17 @@ body:hover .cursor-glow {
 
     </div>
 
-
     <div class="portfolio">
-
 
         <article class="project">
 
-            <div class="project-media">
-
-                <!--
-                PUT YOUR VIDEO HERE:
-
-                <video
-                    src="videos/restaurant.mp4"
-                    controls
-                    playsinline
-                ></video>
-                -->
-
-            </div>
+            <div class="project-media"></div>
 
             <div class="project-content">
 
                 <div class="project-meta">
-
-                    <span>
-                        Restaurant
-                    </span>
-
-                    <span>
-                        01 / 06
-                    </span>
-
+                    <span>Restaurant</span>
+                    <span>01 / 06</span>
                 </div>
 
                 <h3>
@@ -2979,29 +2772,15 @@ body:hover .cursor-glow {
 
         </article>
 
-
         <article class="project">
 
-            <div class="project-media">
-
-                <!--
-                <video
-                    src="videos/cafe.mp4"
-                    controls
-                    playsinline
-                ></video>
-                -->
-
-            </div>
+            <div class="project-media"></div>
 
             <div class="project-content">
 
                 <div class="project-meta">
-
                     <span>Café</span>
-
                     <span>02 / 06</span>
-
                 </div>
 
                 <h3>
@@ -3016,23 +2795,15 @@ body:hover .cursor-glow {
 
         </article>
 
-
         <article class="project">
 
-            <div class="project-media">
-
-                <!-- YOUR VIDEO -->
-
-            </div>
+            <div class="project-media"></div>
 
             <div class="project-content">
 
                 <div class="project-meta">
-
                     <span>Retail</span>
-
                     <span>03 / 06</span>
-
                 </div>
 
                 <h3>
@@ -3047,23 +2818,15 @@ body:hover .cursor-glow {
 
         </article>
 
-
         <article class="project">
 
-            <div class="project-media">
-
-                <!-- YOUR VIDEO -->
-
-            </div>
+            <div class="project-media"></div>
 
             <div class="project-content">
 
                 <div class="project-meta">
-
                     <span>Local business</span>
-
                     <span>04 / 06</span>
-
                 </div>
 
                 <h3>
@@ -3079,23 +2842,15 @@ body:hover .cursor-glow {
 
         </article>
 
-
         <article class="project">
 
-            <div class="project-media">
-
-                <!-- YOUR VIDEO -->
-
-            </div>
+            <div class="project-media"></div>
 
             <div class="project-content">
 
                 <div class="project-meta">
-
                     <span>Brand</span>
-
                     <span>05 / 06</span>
-
                 </div>
 
                 <h3>
@@ -3110,23 +2865,15 @@ body:hover .cursor-glow {
 
         </article>
 
-
         <article class="project">
 
-            <div class="project-media">
-
-                <!-- YOUR VIDEO -->
-
-            </div>
+            <div class="project-media"></div>
 
             <div class="project-content">
 
                 <div class="project-meta">
-
                     <span>Promotion</span>
-
                     <span>06 / 06</span>
-
                 </div>
 
                 <h3>
@@ -3141,79 +2888,37 @@ body:hover .cursor-glow {
 
         </article>
 
-
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     STATS
-===================================================== -->
 
 <section class="container reveal">
 
     <div class="stats">
 
         <div class="stat">
-
-            <div class="stat-number">
-                9:16<span>↗</span>
-            </div>
-
-            <div class="stat-label">
-                Social-first format
-            </div>
-
+            <div class="stat-number">9:16<span>↗</span></div>
+            <div class="stat-label">Social-first format</div>
         </div>
 
-
         <div class="stat">
-
-            <div class="stat-number">
-                HD<span>+</span>
-            </div>
-
-            <div class="stat-label">
-                High-quality delivery
-            </div>
-
+            <div class="stat-number">HD<span>+</span></div>
+            <div class="stat-label">High-quality delivery</div>
         </div>
 
-
         <div class="stat">
-
-            <div class="stat-number">
-                3<span>+</span>
-            </div>
-
-            <div class="stat-label">
-                Platforms supported
-            </div>
-
+            <div class="stat-number">3<span>+</span></div>
+            <div class="stat-label">Platforms supported</div>
         </div>
 
-
         <div class="stat">
-
-            <div class="stat-number">
-                1<span>→</span>
-            </div>
-
-            <div class="stat-label">
-                Simple workflow
-            </div>
-
+            <div class="stat-number">1<span>→</span></div>
+            <div class="stat-label">Simple workflow</div>
         </div>
 
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     SERVICES
-===================================================== -->
 
 <section
     class="container reveal"
@@ -3244,20 +2949,15 @@ body:hover .cursor-glow {
 
     </div>
 
-
     <div class="services">
 
         <div class="service">
 
             <div class="service-image reels"></div>
 
-            <div class="service-number">
-                01
-            </div>
+            <div class="service-number">01</div>
 
-            <h3>
-                Reels & TikToks
-            </h3>
+            <h3>Reels & TikToks</h3>
 
             <p>
                 Vertical videos built specifically for
@@ -3266,18 +2966,13 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="service">
 
             <div class="service-image hooks"></div>
 
-            <div class="service-number">
-                02
-            </div>
+            <div class="service-number">02</div>
 
-            <h3>
-                Hooks & pacing
-            </h3>
+            <h3>Hooks & pacing</h3>
 
             <p>
                 Strong openings, tighter cuts and pacing
@@ -3286,18 +2981,13 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="service">
 
             <div class="service-image captions"></div>
 
-            <div class="service-number">
-                03
-            </div>
+            <div class="service-number">03</div>
 
-            <h3>
-                Captions
-            </h3>
+            <h3>Captions</h3>
 
             <p>
                 Clean, readable subtitles and text
@@ -3306,18 +2996,13 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="service">
 
             <div class="service-image motion"></div>
 
-            <div class="service-number">
-                04
-            </div>
+            <div class="service-number">04</div>
 
-            <h3>
-                Motion graphics
-            </h3>
+            <h3>Motion graphics</h3>
 
             <p>
                 Subtle animations, transitions and
@@ -3326,18 +3011,13 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="service">
 
             <div class="service-image color"></div>
 
-            <div class="service-number">
-                05
-            </div>
+            <div class="service-number">05</div>
 
-            <h3>
-                Color & sound
-            </h3>
+            <h3>Color & sound</h3>
 
             <p>
                 Color correction, music, sound design
@@ -3346,18 +3026,13 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="service">
 
             <div class="service-image delivery"></div>
 
-            <div class="service-number">
-                06
-            </div>
+            <div class="service-number">06</div>
 
-            <h3>
-                Social-ready delivery
-            </h3>
+            <h3>Social-ready delivery</h3>
 
             <p>
                 Finished files exported correctly and
@@ -3370,17 +3045,11 @@ body:hover .cursor-glow {
 
 </section>
 
-
-<!-- =====================================================
-     FEATURE
-===================================================== -->
-
 <section class="container reveal">
 
     <div class="feature">
 
         <div class="feature-image"></div>
-
 
         <div class="feature-card">
 
@@ -3405,7 +3074,6 @@ body:hover .cursor-glow {
                 content that looks intentional and
                 professional.
             </p>
-
 
             <ul class="check-list">
 
@@ -3432,11 +3100,6 @@ body:hover .cursor-glow {
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     PROCESS
-===================================================== -->
 
 <section
     class="container reveal"
@@ -3467,7 +3130,6 @@ body:hover .cursor-glow {
 
     </div>
 
-
     <div class="process">
 
         <div class="step">
@@ -3489,7 +3151,6 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="step">
 
             <div class="step-number">
@@ -3508,7 +3169,6 @@ body:hover .cursor-glow {
             </p>
 
         </div>
-
 
         <div class="step">
 
@@ -3532,11 +3192,6 @@ body:hover .cursor-glow {
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     TESTIMONIALS
-===================================================== -->
 
 <section class="container reveal">
 
@@ -3563,7 +3218,6 @@ body:hover .cursor-glow {
         </p>
 
     </div>
-
 
     <div class="testimonials">
 
@@ -3598,7 +3252,6 @@ body:hover .cursor-glow {
             </div>
 
         </div>
-
 
         <div class="quote">
 
@@ -3636,11 +3289,6 @@ body:hover .cursor-glow {
 
 </section>
 
-
-<!-- =====================================================
-     FAQ
-===================================================== -->
-
 <section
     class="container reveal"
     id="faq"
@@ -3661,7 +3309,6 @@ body:hover .cursor-glow {
         </div>
 
     </div>
-
 
     <div class="faq">
 
@@ -3689,7 +3336,6 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="faq-item">
 
             <div class="faq-question">
@@ -3715,7 +3361,6 @@ body:hover .cursor-glow {
 
         </div>
 
-
         <div class="faq-item">
 
             <div class="faq-question">
@@ -3739,7 +3384,6 @@ body:hover .cursor-glow {
             </div>
 
         </div>
-
 
         <div class="faq-item">
 
@@ -3768,11 +3412,6 @@ body:hover .cursor-glow {
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     CTA
-===================================================== -->
 
 <section
     class="container reveal"
@@ -3807,7 +3446,6 @@ body:hover .cursor-glow {
                 Message me on Instagram ↗
             </a>
 
-
             <a
                 href="#top"
                 class="btn btn-secondary"
@@ -3821,13 +3459,7 @@ body:hover .cursor-glow {
 
 </section>
 
-
 </main>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
 <footer class="container">
 
@@ -3841,12 +3473,7 @@ body:hover .cursor-glow {
 
 </footer>
 
-
 <script>
-
-/* =========================================================
-   STICKY NAV
-========================================================= */
 
 const header =
     document.querySelector("header");
@@ -3876,11 +3503,6 @@ window.addEventListener(
 );
 
 updateHeader();
-
-
-/* =========================================================
-   SCROLL REVEALS
-========================================================= */
 
 const revealElements =
     document.querySelectorAll(
@@ -3919,7 +3541,6 @@ const observer =
         }
     );
 
-
 revealElements.forEach(
     element => {
 
@@ -3929,11 +3550,6 @@ revealElements.forEach(
 
     }
 );
-
-
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
 
 const cursor =
     document.querySelector(
@@ -3945,7 +3561,6 @@ let mouseY = 0;
 
 let glowX = 0;
 let glowY = 0;
-
 
 document.addEventListener(
     "mousemove",
@@ -3959,7 +3574,6 @@ document.addEventListener(
 
     }
 );
-
 
 function animateCursor() {
 
