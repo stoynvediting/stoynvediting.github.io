@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +12,32 @@ content="Short-form video editing for restaurants, shops and growing businesses.
 <style>
 
 /* =========================================================
-   RESET / GLOBAL
+   01 — VARIABLES
+========================================================= */
+
+:root {
+    --bg: #05060b;
+    --bg-soft: #090b13;
+    --card: #0e111b;
+    --card-hover: #131725;
+
+    --white: #f8f9ff;
+    --text: #dfe3ef;
+    --muted: #8b91a5;
+
+    --blue: #5794ff;
+    --violet: #8d5cff;
+    --purple: #b15cff;
+    --yellow: #eaff63;
+
+    --line: rgba(255,255,255,.09);
+
+    --max: 1180px;
+}
+
+
+/* =========================================================
+   02 — RESET
 ========================================================= */
 
 * {
@@ -22,36 +46,12 @@ content="Short-form video editing for restaurants, shops and growing businesses.
     box-sizing: border-box;
 }
 
-:root {
-    --bg: #06070d;
-    --bg-2: #0a0c15;
-    --card: #10121c;
-    --card-2: #151827;
-
-    --white: #f7f8ff;
-    --text: #dfe2ee;
-    --muted: #8e93a7;
-
-    --blue: #4d8dff;
-    --violet: #8b5cf6;
-    --purple: #a855f7;
-    --yellow: #e9ff63;
-
-    --line: rgba(255,255,255,0.09);
-
-    --max: 1180px;
-}
-
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    background:
-        radial-gradient(circle at 80% -10%, rgba(99, 66, 255, .16), transparent 32%),
-        radial-gradient(circle at 5% 25%, rgba(40, 120, 255, .08), transparent 25%),
-        var(--bg);
-
+    background: var(--bg);
     color: var(--white);
 
     font-family:
@@ -64,41 +64,159 @@ body {
         sans-serif;
 
     line-height: 1.5;
+
     overflow-x: hidden;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-
-    background-image:
-        linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
-
-    background-size: 70px 70px;
-
-    pointer-events: none;
-    z-index: -1;
-}
-
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 button {
     font: inherit;
 }
 
+
+/* =========================================================
+   03 — SCROLL PROGRESS BAR
+========================================================= */
+
+.scroll-progress {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 3px;
+
+    background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--violet),
+        var(--purple)
+    );
+
+    z-index: 9999;
+
+    box-shadow:
+        0 0 15px rgba(87,148,255,.7);
+}
+
+
+/* =========================================================
+   04 — BACKGROUND
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    pointer-events: none;
+
+    z-index: -3;
+
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(70px);
+    }
+}
+
+.ambient {
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(89,94,255,.10),
+            transparent 68%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+
+    z-index: -2;
+
+    animation: ambientFloat 10s ease-in-out infinite alternate;
+}
+
+.ambient.one {
+    top: -250px;
+    right: -200px;
+}
+
+.ambient.two {
+    bottom: -300px;
+    left: -220px;
+
+    animation-delay: -4s;
+}
+
+@keyframes ambientFloat {
+    from {
+        transform: translate3d(0,0,0) scale(1);
+    }
+
+    to {
+        transform: translate3d(30px,25px,0) scale(1.12);
+    }
+}
+
+
+/* =========================================================
+   05 — CONTAINER
+========================================================= */
+
 .container {
-    width: min(var(--max), calc(100% - 42px));
+    width: min(
+        var(--max),
+        calc(100% - 42px)
+    );
+
     margin: auto;
 }
 
+
 /* =========================================================
-   NAVIGATION
+   06 — NAVIGATION
 ========================================================= */
+
+header {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
 
 nav {
     height: 82px;
@@ -108,12 +226,35 @@ nav {
     justify-content: space-between;
 
     border-bottom: 1px solid var(--line);
+
+    transition:
+        height .35s ease,
+        background .35s ease,
+        border-color .35s ease;
+}
+
+header.scrolled nav {
+    height: 66px;
+
+    background: rgba(5,6,11,.72);
+
+    backdrop-filter: blur(18px);
+
+    border-color: rgba(255,255,255,.12);
 }
 
 .logo {
     font-size: 22px;
+
     font-weight: 950;
+
     letter-spacing: -1.4px;
+
+    transition: transform .25s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
 }
 
 .logo span {
@@ -125,15 +266,38 @@ nav {
     gap: 32px;
 
     color: var(--muted);
+
     font-size: 14px;
 }
 
 .nav-links a {
-    transition: .2s ease;
+    position: relative;
+
+    transition: color .25s ease;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--blue);
+
+    transition: width .25s ease;
 }
 
 .nav-links a:hover {
     color: white;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .nav-contact {
@@ -144,54 +308,78 @@ nav {
     border-radius: 999px;
 
     font-size: 13px;
+
     font-weight: 700;
 
-    transition: .25s ease;
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease;
 }
 
 .nav-contact:hover {
+    transform: translateY(-2px);
+
     background: white;
+
     color: black;
+
     border-color: white;
 }
 
+
 /* =========================================================
-   HERO
+   07 — HERO
 ========================================================= */
 
 .hero {
     position: relative;
 
-    padding: 125px 0 105px;
+    padding: 125px 0 110px;
 }
 
 .hero-orb {
     position: absolute;
 
-    width: 420px;
-    height: 420px;
+    width: 500px;
+    height: 500px;
 
-    right: -170px;
-    top: 20px;
+    right: -190px;
+    top: 10px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(139,92,246,.32),
+            rgba(139,92,246,.34),
             rgba(77,141,255,.08) 45%,
             transparent 70%
         );
 
-    filter: blur(15px);
+    filter: blur(18px);
+
+    animation:
+        heroOrb 7s ease-in-out infinite alternate;
 
     pointer-events: none;
 }
 
+@keyframes heroOrb {
+    from {
+        transform: translate(0,0) scale(1);
+    }
+
+    to {
+        transform: translate(-35px,35px) scale(1.12);
+    }
+}
+
 .eyebrow {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     color: #9ebdff;
@@ -201,9 +389,13 @@ nav {
     letter-spacing: 2px;
 
     font-size: 11px;
+
     font-weight: 800;
 
     margin-bottom: 25px;
+
+    animation:
+        fadeUp .8s ease both;
 }
 
 .eyebrow-dot {
@@ -215,18 +407,54 @@ nav {
     border-radius: 50%;
 
     box-shadow: 0 0 18px var(--blue);
+
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: .6;
+    }
 }
 
 .hero h1 {
     max-width: 1050px;
 
-    font-size: clamp(58px, 9vw, 118px);
+    font-size:
+        clamp(
+            58px,
+            9vw,
+            118px
+        );
 
     line-height: .87;
 
     letter-spacing: -7px;
 
     font-weight: 950;
+
+    animation:
+        heroTitle 1s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes heroTitle {
+    from {
+        opacity: 0;
+        transform: translateY(45px);
+        filter: blur(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
 }
 
 .gradient-text {
@@ -239,20 +467,40 @@ nav {
         );
 
     -webkit-background-clip: text;
+
     background-clip: text;
 
     color: transparent;
+
+    background-size: 200% auto;
+
+    animation:
+        gradientMove 5s ease infinite;
+}
+
+@keyframes gradientMove {
+    0%,100% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
 }
 
 .hero-bottom {
     display: flex;
 
     align-items: flex-end;
+
     justify-content: space-between;
 
     gap: 40px;
 
     margin-top: 50px;
+
+    animation:
+        fadeUp 1s .35s ease both;
 }
 
 .hero-copy {
@@ -271,14 +519,19 @@ nav {
 
 .buttons {
     display: flex;
+
     gap: 12px;
+
     flex-wrap: wrap;
 }
 
 .btn {
+    position: relative;
+
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 14px 21px;
@@ -286,36 +539,115 @@ nav {
     border-radius: 999px;
 
     font-size: 13px;
+
     font-weight: 800;
 
     border: 1px solid rgba(255,255,255,.15);
 
-    transition: .25s ease;
+    overflow: hidden;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.btn::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+        110deg,
+        transparent 20%,
+        rgba(255,255,255,.25),
+        transparent 80%
+    );
+
+    transform: translateX(-120%);
+
+    transition: transform .7s ease;
+}
+
+.btn:hover::before {
+    transform: translateX(120%);
+}
+
+.btn:hover {
+    transform: translateY(-4px);
 }
 
 .btn-primary {
     background: var(--white);
+
     color: #080910;
 
     border-color: var(--white);
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(255,255,255,.12);
+    box-shadow:
+        0 12px 40px rgba(255,255,255,.14);
 }
 
 .btn-secondary:hover {
     background: white;
+
     color: black;
 }
 
+
 /* =========================================================
-   TRUST BAR
+   08 — GENERAL REVEAL ANIMATIONS
+========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(45px);
+
+    filter: blur(5px);
+
+    transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform .9s cubic-bezier(.16,1,.3,1),
+        filter .9s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    filter: blur(0);
+}
+
+.reveal-left {
+    opacity: 0;
+
+    transform: translateX(-45px);
+
+    transition:
+        opacity .9s ease,
+        transform .9s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal-left.visible {
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+
+/* =========================================================
+   09 — TRUST BAR
 ========================================================= */
 
 .trust-bar {
     border-top: 1px solid var(--line);
+
     border-bottom: 1px solid var(--line);
 
     padding: 20px 0;
@@ -329,6 +661,7 @@ nav {
     letter-spacing: 2.5px;
 
     overflow: hidden;
+
     white-space: nowrap;
 }
 
@@ -340,14 +673,29 @@ nav {
     gap: 30px;
 }
 
+.trust-inner span {
+    transition:
+        color .3s ease,
+        transform .3s ease;
+}
+
+.trust-inner span:hover {
+    color: white;
+
+    transform: translateY(-2px);
+}
+
 .trust-inner span::before {
     content: "✦";
+
     color: var(--violet);
+
     margin-right: 12px;
 }
 
+
 /* =========================================================
-   GENERAL SECTIONS
+   10 — SECTIONS
 ========================================================= */
 
 section {
@@ -358,6 +706,7 @@ section {
     display: flex;
 
     justify-content: space-between;
+
     align-items: flex-end;
 
     gap: 35px;
@@ -373,13 +722,19 @@ section {
     letter-spacing: 2px;
 
     font-size: 10px;
+
     font-weight: 900;
 
     margin-bottom: 12px;
 }
 
 .section-title {
-    font-size: clamp(42px, 6vw, 70px);
+    font-size:
+        clamp(
+            42px,
+            6vw,
+            70px
+        );
 
     line-height: .94;
 
@@ -396,14 +751,16 @@ section {
     font-size: 15px;
 }
 
+
 /* =========================================================
-   PORTFOLIO
+   11 — PORTFOLIO
 ========================================================= */
 
 .portfolio {
     display: grid;
 
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns:
+        repeat(12,1fr);
 
     gap: 18px;
 }
@@ -419,16 +776,22 @@ section {
 
     background: var(--card);
 
-    transition: .35s ease;
+    transition:
+        transform .45s cubic-bezier(.16,1,.3,1),
+        border-color .35s ease,
+        box-shadow .45s ease;
 }
 
 .project:hover {
-    transform: translateY(-6px);
+    transform:
+        translateY(-9px)
+        scale(1.008);
 
-    border-color: rgba(120,130,255,.3);
+    border-color:
+        rgba(120,130,255,.35);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
+        0 30px 80px rgba(0,0,0,.38);
 }
 
 .project.large {
@@ -452,21 +815,44 @@ section {
             rgba(139,92,246,.35),
             transparent 30%
         ),
-        linear-gradient(135deg,#171a2c,#08090e);
+        linear-gradient(
+            135deg,
+            #171a2c,
+            #08090e
+        );
 }
 
-/*
-   Replace the placeholder below with your actual video.
+.project-media::before {
+    content: "";
 
-   Example:
+    position: absolute;
 
-   <video
-       src="videos/restaurant.mp4"
-       controls
-       playsinline
-   ></video>
+    width: 150px;
+    height: 150px;
 
-*/
+    left: 20%;
+    top: 20%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(77,141,255,.35),
+            transparent 70%
+        );
+
+    filter: blur(15px);
+
+    transition:
+        transform .7s ease;
+}
+
+.project:hover .project-media::before {
+    transform:
+        translate(100px,40px)
+        scale(1.5);
+}
 
 .project-media::after {
     content: "VIDEO PROJECT";
@@ -476,6 +862,7 @@ section {
     inset: 0;
 
     display: grid;
+
     place-items: center;
 
     color: rgba(255,255,255,.25);
@@ -496,6 +883,13 @@ section {
     display: block;
 
     object-fit: cover;
+
+    transition:
+        transform .7s cubic-bezier(.16,1,.3,1);
+}
+
+.project:hover video {
+    transform: scale(1.035);
 }
 
 .project-content {
@@ -524,6 +918,13 @@ section {
     font-size: 21px;
 
     letter-spacing: -.7px;
+
+    transition:
+        color .25s ease;
+}
+
+.project:hover h3 {
+    color: #a9c6ff;
 }
 
 .project-content p {
@@ -534,16 +935,19 @@ section {
     font-size: 13px;
 }
 
+
 /* =========================================================
-   STATS
+   12 — STATS
 ========================================================= */
 
 .stats {
     display: grid;
 
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns:
+        repeat(4,1fr);
 
     border-top: 1px solid var(--line);
+
     border-bottom: 1px solid var(--line);
 }
 
@@ -551,6 +955,14 @@ section {
     padding: 32px 25px;
 
     border-right: 1px solid var(--line);
+
+    transition:
+        background .35s ease;
+}
+
+.stat:hover {
+    background:
+        rgba(255,255,255,.025);
 }
 
 .stat:last-child {
@@ -577,14 +989,16 @@ section {
     font-size: 12px;
 }
 
+
 /* =========================================================
-   SERVICES
+   13 — SERVICES
 ========================================================= */
 
 .services {
     display: grid;
 
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns:
+        repeat(3,1fr);
 
     border-top: 1px solid var(--line);
 }
@@ -595,10 +1009,19 @@ section {
     padding: 28px 30px 32px 0;
 
     border-bottom: 1px solid var(--line);
+
+    transition:
+        transform .4s ease,
+        padding-left .4s ease;
+}
+
+.service:hover {
+    transform: translateX(7px);
 }
 
 .service:not(:nth-child(3n)) {
     border-right: 1px solid var(--line);
+
     padding-right: 30px;
 }
 
@@ -632,14 +1055,16 @@ section {
     max-width: 310px;
 }
 
+
 /* =========================================================
-   FEATURE / PHOTO
+   14 — FEATURE
 ========================================================= */
 
 .feature {
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
     gap: 18px;
 }
@@ -661,6 +1086,16 @@ section {
         ),
         url("https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200")
         center / cover;
+
+    transition:
+        transform .7s cubic-bezier(.16,1,.3,1),
+        filter .7s ease;
+}
+
+.feature-image:hover {
+    transform: scale(.985);
+
+    filter: saturate(1.15);
 }
 
 .feature-card {
@@ -686,7 +1121,12 @@ section {
 }
 
 .feature-card h2 {
-    font-size: clamp(40px,5vw,65px);
+    font-size:
+        clamp(
+            40px,
+            5vw,
+            65px
+        );
 
     line-height: .94;
 
@@ -717,6 +1157,13 @@ section {
     color: #c8cbd6;
 
     font-size: 14px;
+
+    transition:
+        padding-left .3s ease;
+}
+
+.check-list li:hover {
+    padding-left: 7px;
 }
 
 .check-list li::before {
@@ -729,14 +1176,16 @@ section {
     margin-right: 12px;
 }
 
+
 /* =========================================================
-   PROCESS
+   15 — PROCESS
 ========================================================= */
 
 .process {
     display: grid;
 
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns:
+        repeat(3,1fr);
 
     gap: 18px;
 }
@@ -755,6 +1204,25 @@ section {
             145deg,
             rgba(255,255,255,.025),
             transparent
+        );
+
+    transition:
+        transform .45s cubic-bezier(.16,1,.3,1),
+        border-color .35s ease,
+        background .35s ease;
+}
+
+.step:hover {
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(87,148,255,.28);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(87,148,255,.07),
+            rgba(139,92,246,.025)
         );
 }
 
@@ -784,14 +1252,16 @@ section {
     font-size: 14px;
 }
 
+
 /* =========================================================
-   TESTIMONIALS
+   16 — TESTIMONIALS
 ========================================================= */
 
 .testimonials {
     display: grid;
 
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns:
+        repeat(2,1fr);
 
     gap: 18px;
 }
@@ -804,6 +1274,17 @@ section {
     border-radius: 20px;
 
     background: var(--card);
+
+    transition:
+        transform .4s ease,
+        border-color .35s ease;
+}
+
+.quote:hover {
+    transform: translateY(-6px);
+
+    border-color:
+        rgba(139,92,246,.25);
 }
 
 .quote-mark {
@@ -848,10 +1329,25 @@ section {
             var(--blue),
             var(--violet)
         );
+
+    animation:
+        avatarGlow 3s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+    0%,100% {
+        box-shadow: 0 0 0 rgba(87,148,255,0);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px rgba(87,148,255,.3);
+    }
 }
 
 .person-name {
     font-size: 13px;
+
     font-weight: bold;
 }
 
@@ -863,15 +1359,9 @@ section {
     margin-top: 2px;
 }
 
-/*
-   These testimonials are DEMO placeholders.
-   Replace them with real client testimonials once
-   you have clients. Do not present demo testimonials
-   as genuine client reviews.
-*/
 
 /* =========================================================
-   FAQ
+   17 — FAQ
 ========================================================= */
 
 .faq {
@@ -882,6 +1372,13 @@ section {
     border-top: 1px solid var(--line);
 
     padding: 23px 0;
+
+    transition:
+        padding-left .3s ease;
+}
+
+.faq-item:hover {
+    padding-left: 8px;
 }
 
 .faq-question {
@@ -896,6 +1393,17 @@ section {
     font-weight: 700;
 }
 
+.faq-question span:last-child {
+    color: var(--blue);
+
+    transition:
+        transform .3s ease;
+}
+
+.faq-item:hover .faq-question span:last-child {
+    transform: rotate(90deg);
+}
+
 .faq-answer {
     color: var(--muted);
 
@@ -906,8 +1414,9 @@ section {
     margin-top: 10px;
 }
 
+
 /* =========================================================
-   CTA
+   18 — CTA
 ========================================================= */
 
 .cta {
@@ -932,7 +1441,15 @@ section {
         ),
         #111426;
 
-    border: 1px solid rgba(130,140,255,.22);
+    border: 1px solid
+        rgba(130,140,255,.22);
+
+    transition:
+        transform .5s ease;
+}
+
+.cta:hover {
+    transform: translateY(-5px);
 }
 
 .cta::after {
@@ -953,6 +1470,19 @@ section {
     opacity: .12;
 
     filter: blur(50px);
+
+    animation:
+        ctaGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes ctaGlow {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.4);
+    }
 }
 
 .cta-label {
@@ -972,7 +1502,12 @@ section {
 
     margin-top: 13px;
 
-    font-size: clamp(45px,6vw,78px);
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            78px
+        );
 
     line-height: .93;
 
@@ -993,8 +1528,9 @@ section {
     margin-top: 30px;
 }
 
+
 /* =========================================================
-   FOOTER
+   19 — FOOTER
 ========================================================= */
 
 footer {
@@ -1013,14 +1549,77 @@ footer {
     font-size: 12px;
 }
 
+
 /* =========================================================
-   RESPONSIVE
+   20 — CUSTOM CURSOR GLOW
+========================================================= */
+
+.cursor-glow {
+    position: fixed;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(87,148,255,.07),
+            transparent 70%
+        );
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index: -1;
+
+    opacity: 0;
+
+    transition:
+        opacity .3s ease;
+}
+
+body:hover .cursor-glow {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   21 — ENTRANCE ANIMATION
+========================================================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   22 — RESPONSIVE
 ========================================================= */
 
 @media (max-width: 850px) {
 
     .container {
-        width: min(100% - 28px, var(--max));
+        width:
+            min(
+                100% - 28px,
+                var(--max)
+            );
     }
 
     .nav-links {
@@ -1028,7 +1627,8 @@ footer {
     }
 
     .hero {
-        padding: 85px 0 80px;
+        padding:
+            85px 0 80px;
     }
 
     .hero h1 {
@@ -1065,7 +1665,8 @@ footer {
     }
 
     .stats {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .stat:nth-child(2) {
@@ -1082,12 +1683,20 @@ footer {
         padding-right: 0 !important;
     }
 
+    .service:hover {
+        transform: none;
+    }
+
     .feature {
         grid-template-columns: 1fr;
     }
 
     .feature-image {
         min-height: 350px;
+    }
+
+    .feature-card {
+        padding: 35px 25px;
     }
 
     .process {
@@ -1113,6 +1722,30 @@ footer {
     footer div + div {
         margin-top: 8px;
     }
+
+    .cursor-glow {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   23 — REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: .01ms !important;
+    }
 }
 
 </style>
@@ -1122,27 +1755,59 @@ footer {
 <body>
 
 
+<!-- SCROLL PROGRESS -->
+
+<div class="scroll-progress"></div>
+
+
+<!-- BACKGROUND LIGHTS -->
+
+<div class="ambient one"></div>
+<div class="ambient two"></div>
+
+<div class="cursor-glow"></div>
+
+
 <!-- =====================================================
      NAV
 ===================================================== -->
 
-<header class="container">
+<header>
 
-<nav>
+<nav class="container">
 
-    <!-- CHANGE THIS TO YOUR BRAND -->
+    <!-- CHANGE BRAND NAME HERE -->
+
     <a href="#" class="logo">
         EDIT<span>LAB</span>
     </a>
 
+
     <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#faq">FAQ</a>
+
+        <a href="#work">
+            Work
+        </a>
+
+        <a href="#services">
+            Services
+        </a>
+
+        <a href="#process">
+            Process
+        </a>
+
+        <a href="#faq">
+            FAQ
+        </a>
+
     </div>
 
-    <a href="#contact" class="nav-contact">
+
+    <a
+        href="#contact"
+        class="nav-contact"
+    >
         Let's talk ↗
     </a>
 
@@ -1162,33 +1827,56 @@ footer {
 
     <div class="hero-orb"></div>
 
+
     <div class="eyebrow">
+
         <span class="eyebrow-dot"></span>
+
         Short-form content studio
+
     </div>
 
+
     <h1>
+
         YOUR BUSINESS.<br>
+
         <span class="gradient-text">
             THEIR NEXT SCROLL.
         </span>
+
     </h1>
+
 
     <div class="hero-bottom">
 
         <p class="hero-copy">
+
             I turn ordinary phone footage into
-            <strong>high-quality short-form content</strong>
+
+            <strong>
+                high-quality short-form content
+            </strong>
+
             for restaurants, shops and local businesses.
+
         </p>
+
 
         <div class="buttons">
 
-            <a href="#work" class="btn btn-primary">
+            <a
+                href="#work"
+                class="btn btn-primary"
+            >
                 View selected work ↓
             </a>
 
-            <a href="#contact" class="btn btn-secondary">
+
+            <a
+                href="#contact"
+                class="btn btn-secondary"
+            >
                 Start a project ↗
             </a>
 
@@ -1207,11 +1895,25 @@ footer {
 
     <div class="container trust-inner">
 
-        <span>Instagram Reels</span>
-        <span>TikTok</span>
-        <span>YouTube Shorts</span>
-        <span>Vertical Ads</span>
-        <span>Social Content</span>
+        <span>
+            Instagram Reels
+        </span>
+
+        <span>
+            TikTok
+        </span>
+
+        <span>
+            YouTube Shorts
+        </span>
+
+        <span>
+            Vertical Ads
+        </span>
+
+        <span>
+            Social Content
+        </span>
 
     </div>
 
@@ -1222,7 +1924,10 @@ footer {
      PORTFOLIO
 ===================================================== -->
 
-<section class="container" id="work">
+<section
+    class="container reveal"
+    id="work"
+>
 
     <div class="section-top">
 
@@ -1239,9 +1944,12 @@ footer {
 
         </div>
 
+
         <p class="section-description">
+
             A selection of short-form concepts for food,
             retail, hospitality and local brands.
+
         </p>
 
     </div>
@@ -1250,33 +1958,44 @@ footer {
     <div class="portfolio">
 
 
-        <!-- PROJECT 1 -->
+        <!-- PROJECT 01 -->
 
-        <article class="project large">
+        <article class="project">
 
             <div class="project-media">
 
                 <!--
-                REPLACE THIS DIV WITH YOUR VIDEO:
+                ADD YOUR VIDEO HERE
 
-                <video controls playsinline>
-                    <source src="videos/restaurant.mp4"
-                            type="video/mp4">
-                </video>
+                <video
+                    src="videos/restaurant.mp4"
+                    controls
+                    playsinline
+                ></video>
                 -->
 
             </div>
 
+
             <div class="project-content">
 
                 <div class="project-meta">
-                    <span>Restaurant</span>
-                    <span>01 / 06</span>
+
+                    <span>
+                        Restaurant
+                    </span>
+
+                    <span>
+                        01 / 06
+                    </span>
+
                 </div>
+
 
                 <h3>
                     Food that sells itself.
                 </h3>
+
 
                 <p>
                     Fast cuts, close-ups, captions and
@@ -1288,26 +2007,36 @@ footer {
         </article>
 
 
-        <!-- PROJECT 2 -->
+        <!-- PROJECT 02 -->
 
-        <article class="project small">
+        <article class="project">
 
             <div class="project-media">
 
-                <!-- YOUR VIDEO HERE -->
+                <!-- YOUR VIDEO -->
 
             </div>
+
 
             <div class="project-content">
 
                 <div class="project-meta">
-                    <span>Café</span>
-                    <span>02 / 06</span>
+
+                    <span>
+                        Café
+                    </span>
+
+                    <span>
+                        02 / 06
+                    </span>
+
                 </div>
+
 
                 <h3>
                     A better morning routine.
                 </h3>
+
 
                 <p>
                     Lifestyle-focused short-form content.
@@ -1318,26 +2047,36 @@ footer {
         </article>
 
 
-        <!-- PROJECT 3 -->
+        <!-- PROJECT 03 -->
 
-        <article class="project small">
+        <article class="project">
 
             <div class="project-media">
 
-                <!-- YOUR VIDEO HERE -->
+                <!-- YOUR VIDEO -->
 
             </div>
+
 
             <div class="project-content">
 
                 <div class="project-meta">
-                    <span>Retail</span>
-                    <span>03 / 06</span>
+
+                    <span>
+                        Retail
+                    </span>
+
+                    <span>
+                        03 / 06
+                    </span>
+
                 </div>
+
 
                 <h3>
                     Product spotlight.
                 </h3>
+
 
                 <p>
                     Clean product presentation for social.
@@ -1348,26 +2087,36 @@ footer {
         </article>
 
 
-        <!-- PROJECT 4 -->
+        <!-- PROJECT 04 -->
 
-        <article class="project large">
+        <article class="project">
 
             <div class="project-media">
 
-                <!-- YOUR VIDEO HERE -->
+                <!-- YOUR VIDEO -->
 
             </div>
+
 
             <div class="project-content">
 
                 <div class="project-meta">
-                    <span>Local business</span>
-                    <span>04 / 06</span>
+
+                    <span>
+                        Local business
+                    </span>
+
+                    <span>
+                        04 / 06
+                    </span>
+
                 </div>
+
 
                 <h3>
                     Turn the everyday into content.
                 </h3>
+
 
                 <p>
                     Behind-the-scenes footage transformed
@@ -1379,26 +2128,36 @@ footer {
         </article>
 
 
-        <!-- PROJECT 5 -->
+        <!-- PROJECT 05 -->
 
-        <article class="project large">
+        <article class="project">
 
             <div class="project-media">
 
-                <!-- YOUR VIDEO HERE -->
+                <!-- YOUR VIDEO -->
 
             </div>
+
 
             <div class="project-content">
 
                 <div class="project-meta">
-                    <span>Brand</span>
-                    <span>05 / 06</span>
+
+                    <span>
+                        Brand
+                    </span>
+
+                    <span>
+                        05 / 06
+                    </span>
+
                 </div>
+
 
                 <h3>
                     Product. Personality. Story.
                 </h3>
+
 
                 <p>
                     A social-first promotional edit.
@@ -1409,26 +2168,36 @@ footer {
         </article>
 
 
-        <!-- PROJECT 6 -->
+        <!-- PROJECT 06 -->
 
-        <article class="project small">
+        <article class="project">
 
             <div class="project-media">
 
-                <!-- YOUR VIDEO HERE -->
+                <!-- YOUR VIDEO -->
 
             </div>
+
 
             <div class="project-content">
 
                 <div class="project-meta">
-                    <span>Promotion</span>
-                    <span>06 / 06</span>
+
+                    <span>
+                        Promotion
+                    </span>
+
+                    <span>
+                        06 / 06
+                    </span>
+
                 </div>
+
 
                 <h3>
                     Make the announcement matter.
                 </h3>
+
 
                 <p>
                     Short-form promotional content.
@@ -1437,6 +2206,7 @@ footer {
             </div>
 
         </article>
+
 
     </div>
 
@@ -1447,7 +2217,7 @@ footer {
      STATS
 ===================================================== -->
 
-<section class="container">
+<section class="container reveal">
 
     <div class="stats">
 
@@ -1511,7 +2281,10 @@ footer {
      SERVICES
 ===================================================== -->
 
-<section class="container" id="services">
+<section
+    class="container reveal"
+    id="services"
+>
 
     <div class="section-top">
 
@@ -1528,9 +2301,12 @@ footer {
 
         </div>
 
+
         <p class="section-description">
+
             Every edit is designed around the way people
             actually consume short-form content.
+
         </p>
 
     </div>
@@ -1655,12 +2431,11 @@ footer {
      FEATURE
 ===================================================== -->
 
-<section class="container">
+<section class="container reveal">
 
     <div class="feature">
 
-        <div class="feature-image">
-        </div>
+        <div class="feature-image"></div>
 
 
         <div class="feature-card">
@@ -1669,10 +2444,12 @@ footer {
                 Why short-form?
             </div>
 
+
             <h2>
                 Your next customer
                 is already scrolling.
             </h2>
+
 
             <p>
                 Your business already has content.
@@ -1681,10 +2458,13 @@ footer {
                 Your team works every day.
             </p>
 
+
             <p style="margin-top:14px;">
+
                 The goal is to turn those moments into
                 content that looks intentional and
                 professional.
+
             </p>
 
 
@@ -1719,7 +2499,10 @@ footer {
      PROCESS
 ===================================================== -->
 
-<section class="container" id="process">
+<section
+    class="container reveal"
+    id="process"
+>
 
     <div class="section-top">
 
@@ -1736,9 +2519,12 @@ footer {
 
         </div>
 
+
         <p class="section-description">
+
             You don't need to become a video editor.
             Just capture the moments and send them over.
+
         </p>
 
     </div>
@@ -1806,10 +2592,10 @@ footer {
 
 
 <!-- =====================================================
-     DEMO TESTIMONIALS
+     TESTIMONIALS
 ===================================================== -->
 
-<section class="container">
+<section class="container reveal">
 
     <div class="section-top">
 
@@ -1826,9 +2612,12 @@ footer {
 
         </div>
 
+
         <p class="section-description">
+
             Replace these placeholders with genuine
             testimonials once you start working with clients.
+
         </p>
 
     </div>
@@ -1843,17 +2632,22 @@ footer {
                 “
             </div>
 
+
             <div class="quote-text">
+
                 This is where your first client testimonial
                 can go. Keep it short, specific and focused
                 on the result of your work.
+
             </div>
+
 
             <div class="quote-person">
 
                 <div class="avatar"></div>
 
                 <div>
+
                     <div class="person-name">
                         Your future client
                     </div>
@@ -1861,6 +2655,7 @@ footer {
                     <div class="person-role">
                         Local business owner
                     </div>
+
                 </div>
 
             </div>
@@ -1874,17 +2669,22 @@ footer {
                 “
             </div>
 
+
             <div class="quote-text">
+
                 Another testimonial can highlight your
                 communication, turnaround time or the
                 quality of the finished videos.
+
             </div>
+
 
             <div class="quote-person">
 
                 <div class="avatar"></div>
 
                 <div>
+
                     <div class="person-name">
                         Another future client
                     </div>
@@ -1892,11 +2692,13 @@ footer {
                     <div class="person-role">
                         Business owner
                     </div>
+
                 </div>
 
             </div>
 
         </div>
+
 
     </div>
 
@@ -1907,7 +2709,10 @@ footer {
      FAQ
 ===================================================== -->
 
-<section class="container" id="faq">
+<section
+    class="container reveal"
+    id="faq"
+>
 
     <div class="section-top">
 
@@ -1932,17 +2737,24 @@ footer {
         <div class="faq-item">
 
             <div class="faq-question">
+
                 <span>
                     Do I need professional cameras?
                 </span>
 
-                <span>+</span>
+                <span>
+                    +
+                </span>
+
             </div>
 
+
             <div class="faq-answer">
+
                 No. For this service, your phone footage
                 can be enough. I'll handle the editing and
                 polish afterwards.
+
             </div>
 
         </div>
@@ -1951,18 +2763,25 @@ footer {
         <div class="faq-item">
 
             <div class="faq-question">
+
                 <span>
                     What kind of footage should I send?
                 </span>
 
-                <span>+</span>
+                <span>
+                    +
+                </span>
+
             </div>
 
+
             <div class="faq-answer">
+
                 Product shots, staff working, customers,
                 behind-the-scenes moments, your location,
                 food preparation and anything that visually
                 represents your business.
+
             </div>
 
         </div>
@@ -1971,17 +2790,24 @@ footer {
         <div class="faq-item">
 
             <div class="faq-question">
+
                 <span>
                     Can you make videos for TikTok and Instagram?
                 </span>
 
-                <span>+</span>
+                <span>
+                    +
+                </span>
+
             </div>
 
+
             <div class="faq-answer">
+
                 Yes. The videos can be delivered in
                 vertical format suitable for Reels,
                 TikTok and YouTube Shorts.
+
             </div>
 
         </div>
@@ -1990,20 +2816,28 @@ footer {
         <div class="faq-item">
 
             <div class="faq-question">
+
                 <span>
                     How do I get started?
                 </span>
 
-                <span>+</span>
+                <span>
+                    +
+                </span>
+
             </div>
 
+
             <div class="faq-answer">
+
                 Send your Instagram page or a few example
                 clips and we can discuss what kind of content
                 would work for your business.
+
             </div>
 
         </div>
+
 
     </div>
 
@@ -2011,10 +2845,13 @@ footer {
 
 
 <!-- =====================================================
-     FINAL CTA
+     CTA
 ===================================================== -->
 
-<section class="container" id="contact">
+<section
+    class="container reveal"
+    id="contact"
+>
 
     <div class="cta">
 
@@ -2022,21 +2859,26 @@ footer {
             Ready when you are
         </div>
 
+
         <h2>
             You bring the footage.
             I'll make it worth watching.
         </h2>
 
+
         <p>
+
             Send over your Instagram page, a few raw clips,
             or just tell me what kind of business you run.
             We'll take it from there.
+
         </p>
 
 
         <div class="buttons">
 
-            <!-- CHANGE THIS LINK -->
+
+            <!-- CHANGE INSTAGRAM LINK -->
 
             <a
                 href="https://instagram.com/"
@@ -2047,7 +2889,7 @@ footer {
             </a>
 
 
-            <!-- CHANGE THIS EMAIL -->
+            <!-- CHANGE EMAIL -->
 
             <a
                 href="mailto:hello@example.com"
@@ -2055,6 +2897,7 @@ footer {
             >
                 Send an email ↗
             </a>
+
 
         </div>
 
@@ -2083,6 +2926,244 @@ footer {
 </footer>
 
 
+<script>
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+const progress =
+    document.querySelector(".scroll-progress");
+
+function updateProgress() {
+
+    const scrollTop =
+        window.scrollY;
+
+    const height =
+        document.documentElement.scrollHeight
+        - window.innerHeight;
+
+    const percentage =
+        height > 0
+        ? (scrollTop / height) * 100
+        : 0;
+
+    progress.style.width =
+        percentage + "%";
+}
+
+window.addEventListener(
+    "scroll",
+    updateProgress,
+    { passive: true }
+);
+
+
+/* =========================================================
+   STICKY NAV
+========================================================= */
+
+const header =
+    document.querySelector("header");
+
+function updateHeader() {
+
+    if (window.scrollY > 30) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateHeader,
+    { passive: true }
+);
+
+
+/* =========================================================
+   SCROLL REVEALS
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .12,
+            rootMargin: "0px 0px -60px 0px"
+        }
+    );
+
+
+revealElements.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+const cursor =
+    document.querySelector(
+        ".cursor-glow"
+    );
+
+let mouseX = 0;
+let mouseY = 0;
+
+let glowX = 0;
+let glowY = 0;
+
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+    }
+);
+
+
+function animateCursor() {
+
+    glowX +=
+        (mouseX - glowX) * .08;
+
+    glowY +=
+        (mouseY - glowY) * .08;
+
+    cursor.style.left =
+        glowX + "px";
+
+    cursor.style.top =
+        glowY + "px";
+
+    requestAnimationFrame(
+        animateCursor
+    );
+
+}
+
+animateCursor();
+
+
+/* =========================================================
+   SMOOTH ANCHOR OFFSET
+========================================================= */
+
+document
+    .querySelectorAll(
+        'a[href^="#"]'
+    )
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function(event) {
+
+                const target =
+                    document.querySelector(
+                        this.getAttribute("href")
+                    );
+
+                if (!target) return;
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   PORTFOLIO STAGGER
+========================================================= */
+
+const projects =
+    document.querySelectorAll(
+        ".project"
+    );
+
+projects.forEach(
+    (project, index) => {
+
+        project.style.transitionDelay =
+            `${index * 70}ms`;
+
+    }
+);
+
+
+/* =========================================================
+   FAQ LITTLE INTERACTION
+========================================================= */
+
+document
+    .querySelectorAll(".faq-item")
+    .forEach(item => {
+
+        const question =
+            item.querySelector(
+                ".faq-question"
+            );
+
+        const answer =
+            item.querySelector(
+                ".faq-answer"
+            );
+
+        answer.style.transition =
+            "opacity .3s ease, max-height .35s ease";
+
+    });
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+updateProgress();
+updateHeader();
+
+</script>
+
+
 </body>
 </html>
-```
