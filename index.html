@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +93,10 @@ a {
     text-decoration: none;
 }
 
+section[id] {
+    scroll-margin-top: 90px;
+}
+
 
 /* =========================================================
    BACKGROUND GRID
@@ -127,7 +130,6 @@ body::before {
 }
 
 @keyframes gridMove {
-
     from {
         transform: translateY(0);
     }
@@ -135,7 +137,6 @@ body::before {
     to {
         transform: translateY(70px);
     }
-
 }
 
 
@@ -188,11 +189,8 @@ body::before {
 }
 
 @keyframes ambientFloat {
-
     from {
-        transform:
-            translate(0,0)
-            scale(1);
+        transform: translate(0,0) scale(1);
     }
 
     to {
@@ -200,7 +198,6 @@ body::before {
             translate(35px,25px)
             scale(1.12);
     }
-
 }
 
 
@@ -394,23 +391,23 @@ header.scrolled nav {
         linear-gradient(
             90deg,
             rgba(4,9,6,.96) 0%,
-            rgba(4,9,6,.78) 32%,
+            rgba(4,9,6,.80) 32%,
             rgba(4,9,6,.38) 62%,
-            rgba(4,9,6,.72) 100%
+            rgba(4,9,6,.74) 100%
         ),
         linear-gradient(
             180deg,
-            rgba(4,9,6,.82) 0%,
-            rgba(4,9,6,.22) 48%,
-            rgba(4,9,6,.92) 100%
+            rgba(4,9,6,.84) 0%,
+            rgba(4,9,6,.20) 48%,
+            rgba(4,9,6,.94) 100%
         ),
-        url("https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1800&q=80");
+        url("https://images.pexels.com/photos/8360497/pexels-photo-8360497.jpeg?auto=compress&cs=tinysrgb&w=1800");
 
     background-size:
         cover;
 
     background-position:
-        center;
+        center 42%;
 
     opacity:
         .72;
@@ -460,7 +457,6 @@ header.scrolled nav {
 }
 
 @keyframes heroOrb {
-
     from {
         transform:
             translate(0,0)
@@ -472,7 +468,6 @@ header.scrolled nav {
             translate(-35px,35px)
             scale(1.12);
     }
-
 }
 
 .eyebrow {
@@ -530,7 +525,6 @@ header.scrolled nav {
 }
 
 @keyframes pulse {
-
     0%,100% {
         transform:
             scale(1);
@@ -540,7 +534,6 @@ header.scrolled nav {
         transform:
             scale(1.5);
     }
-
 }
 
 
@@ -568,11 +561,6 @@ header.scrolled nav {
     font-weight:
         950;
 
-    /*
-        IMPORTANT:
-        The original overflow:hidden caused the second
-        animated line to be clipped. Keep it visible.
-    */
     overflow:
         visible;
 }
@@ -618,7 +606,6 @@ header.scrolled nav {
 }
 
 @keyframes heroLine {
-
     to {
         opacity: 1;
 
@@ -628,7 +615,6 @@ header.scrolled nav {
         filter:
             blur(0);
     }
-
 }
 
 .gradient-text {
@@ -652,9 +638,6 @@ header.scrolled nav {
     background-size:
         200% auto;
 
-    /*
-        Keep the hero reveal AND gradient movement.
-    */
     animation:
         heroLine 1s
         .38s
@@ -667,7 +650,6 @@ header.scrolled nav {
 }
 
 @keyframes gradientMove {
-
     0%,100% {
         background-position:
             0% center;
@@ -677,7 +659,6 @@ header.scrolled nav {
         background-position:
             100% center;
     }
-
 }
 
 .hero-bottom {
@@ -763,10 +744,14 @@ header.scrolled nav {
     overflow:
         hidden;
 
+    cursor:
+        pointer;
+
     transition:
         transform .3s ease,
         box-shadow .3s ease,
-        background .3s ease;
+        background .3s ease,
+        color .3s ease;
 }
 
 .btn::before {
@@ -856,9 +841,6 @@ header.scrolled nav {
         translateY(0);
 }
 
-
-/* Initial states */
-
 .reveal .section-label,
 .reveal .section-title,
 .reveal .section-description {
@@ -901,7 +883,6 @@ header.scrolled nav {
 }
 
 @keyframes chapterLabel {
-
     from {
         opacity: 0;
 
@@ -921,11 +902,9 @@ header.scrolled nav {
         filter:
             blur(0);
     }
-
 }
 
 @keyframes chapterTitle {
-
     from {
         opacity: 0;
 
@@ -945,11 +924,9 @@ header.scrolled nav {
         filter:
             blur(0);
     }
-
 }
 
 @keyframes chapterDescription {
-
     from {
         opacity: 0;
 
@@ -969,11 +946,7 @@ header.scrolled nav {
         filter:
             blur(0);
     }
-
 }
-
-
-/* Small accent line under chapter label */
 
 .reveal .section-label {
     position:
@@ -1024,7 +997,6 @@ header.scrolled nav {
 }
 
 @keyframes chapterLine {
-
     from {
         transform:
             scaleX(0);
@@ -1040,7 +1012,6 @@ header.scrolled nav {
         opacity:
             .8;
     }
-
 }
 
 
@@ -1064,7 +1035,6 @@ header.scrolled nav {
 }
 
 @keyframes contentRise {
-
     from {
         opacity:
             .65;
@@ -1080,7 +1050,6 @@ header.scrolled nav {
         transform:
             translateY(0);
     }
-
 }
 
 
@@ -1666,7 +1635,9 @@ section {
 }
 
 
-/* SERVICE IMAGES */
+/* =========================================================
+   SERVICE IMAGES
+========================================================= */
 
 .service-image {
     width:
@@ -1724,8 +1695,8 @@ section {
     background:
         linear-gradient(
             180deg,
-            rgba(4,9,6,.02),
-            rgba(4,9,6,.72)
+            rgba(4,9,6,.04),
+            rgba(4,9,6,.74)
         ),
         linear-gradient(
             90deg,
@@ -1735,44 +1706,36 @@ section {
 }
 
 
-/*
-    Real stock photography:
-    - vertical/social content
-    - phone content creation
-    - captions/social screen
-    - editing
-    - color/content work
-    - delivery/social publishing
-*/
+/* Actual stock photos */
 
 .service-image.reels {
     background-image:
-        url("https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1000&q=80");
+        url("https://images.pexels.com/photos/8359955/pexels-photo-8359955.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .service-image.hooks {
     background-image:
-        url("https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&w=1000&q=80");
+        url("https://images.pexels.com/photos/8100060/pexels-photo-8100060.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .service-image.captions {
     background-image:
-        url("https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1000&q=80");
+        url("https://images.pexels.com/photos/16229745/pexels-photo-16229745.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .service-image.motion {
     background-image:
-        url("https://images.unsplash.com/photo-1574717024453-354056aafa98?auto=format&fit=crop&w=1000&q=80");
+        url("https://images.pexels.com/photos/38854516/pexels-photo-38854516.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .service-image.color {
     background-image:
-        url("https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1000&q=80");
+        url("https://images.pexels.com/photos/11063289/pexels-photo-11063289.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .service-image.delivery {
     background-image:
-        url("https://images.unsplash.com/photo-1551817958-20204d6ab2b4?auto=format&fit=crop&w=1000&q=80");
+        url("https://images.pexels.com/photos/19826629/pexels-photo-19826629.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .service-number {
@@ -1843,10 +1806,10 @@ section {
     background:
         linear-gradient(
             135deg,
-            rgba(30,60,160,.18),
-            rgba(50,180,100,.12)
+            rgba(30,60,160,.20),
+            rgba(50,180,100,.13)
         ),
-        url("https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200")
+        url("https://images.pexels.com/photos/11063289/pexels-photo-11063289.jpeg?auto=compress&cs=tinysrgb&w=1400")
         center / cover;
 
     transition:
@@ -2096,23 +2059,23 @@ section {
         linear-gradient(
             180deg,
             rgba(4,9,6,.02),
-            rgba(4,9,6,.65)
+            rgba(4,9,6,.68)
         );
 }
 
 .step-image.send {
     background-image:
-        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1100&q=80");
+        url("https://images.pexels.com/photos/8359955/pexels-photo-8359955.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .step-image.edit {
     background-image:
-        url("https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1100&q=80");
+        url("https://images.pexels.com/photos/9317525/pexels-photo-9317525.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .step-image.post {
     background-image:
-        url("https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1100&q=80");
+        url("https://images.pexels.com/photos/15525898/pexels-photo-15525898.jpeg?auto=compress&cs=tinysrgb&w=1200");
 }
 
 .step h3 {
@@ -2244,7 +2207,6 @@ section {
 }
 
 @keyframes avatarGlow {
-
     0%,100% {
         box-shadow:
             0 0 0
@@ -2256,7 +2218,6 @@ section {
             0 0 20px
             rgba(87,148,255,.3);
     }
-
 }
 
 .person-name {
@@ -2430,7 +2391,6 @@ section {
 }
 
 @keyframes ctaGlow {
-
     from {
         transform:
             scale(1);
@@ -2440,7 +2400,6 @@ section {
         transform:
             scale(1.4);
     }
-
 }
 
 .cta-label {
@@ -2792,7 +2751,7 @@ body:hover .cursor-glow {
 </head>
 
 
-<body>
+<body id="top">
 
 <!-- AMBIENT BACKGROUND -->
 
@@ -2810,7 +2769,7 @@ body:hover .cursor-glow {
 
 <nav class="container">
 
-    <a href="#" class="logo">
+    <a href="#top" class="logo">
         EDIT<span>LAB</span>
     </a>
 
@@ -2977,8 +2936,6 @@ body:hover .cursor-glow {
     <div class="portfolio">
 
 
-        <!-- PROJECT 01 -->
-
         <article class="project">
 
             <div class="project-media">
@@ -3023,8 +2980,6 @@ body:hover .cursor-glow {
         </article>
 
 
-        <!-- PROJECT 02 -->
-
         <article class="project">
 
             <div class="project-media">
@@ -3062,8 +3017,6 @@ body:hover .cursor-glow {
         </article>
 
 
-        <!-- PROJECT 03 -->
-
         <article class="project">
 
             <div class="project-media">
@@ -3094,8 +3047,6 @@ body:hover .cursor-glow {
 
         </article>
 
-
-        <!-- PROJECT 04 -->
 
         <article class="project">
 
@@ -3129,8 +3080,6 @@ body:hover .cursor-glow {
         </article>
 
 
-        <!-- PROJECT 05 -->
-
         <article class="project">
 
             <div class="project-media">
@@ -3161,8 +3110,6 @@ body:hover .cursor-glow {
 
         </article>
 
-
-        <!-- PROJECT 06 -->
 
         <article class="project">
 
@@ -3862,9 +3809,8 @@ body:hover .cursor-glow {
 
 
             <a
-                href="#"
+                href="#top"
                 class="btn btn-secondary"
-                onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;"
             >
                 Back to top ↑
             </a>
@@ -3881,7 +3827,7 @@ body:hover .cursor-glow {
 
 <!-- =====================================================
      FOOTER
-========================================================= -->
+===================================================== -->
 
 <footer class="container">
 
@@ -3929,8 +3875,6 @@ window.addEventListener(
     { passive: true }
 );
 
-
-/* Run once on page load */
 updateHeader();
 
 
@@ -4040,61 +3984,7 @@ function animateCursor() {
 
 animateCursor();
 
-
-/* =========================================================
-   SMOOTH ANCHORS
-========================================================= */
-
-document
-    .querySelectorAll(
-        'a[href^="#"]'
-    )
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                const href =
-                    link.getAttribute("href");
-
-                /*
-                    Ignore "#" itself because the Back to Top
-                    button already has its own smooth-scroll
-                    behavior.
-                */
-                if (
-                    !href ||
-                    href === "#"
-                ) {
-                    return;
-                }
-
-                const target =
-                    document.querySelector(
-                        href
-                    );
-
-                if (!target)
-                    return;
-
-                event.preventDefault();
-
-                target.scrollIntoView({
-                    behavior:
-                        "smooth",
-
-                    block:
-                        "start"
-                });
-
-            }
-        );
-
-    });
-
 </script>
 
 </body>
 </html>
-```
